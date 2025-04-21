@@ -56,10 +56,13 @@
         </div>
       </nav>
     </header>
-    <main class=" overflow-hidden h-screen relative bg-radial from-pink-200 to-blue-50 flex items-center justify-center">
-        <img class=" w-[500px] h-[500px] object-contain fixed bottom-[-100px] left-[100px]" src="/image/doodle.png"/>
+    <main
+      class=" z-20 overflow-hidden h-screen relative bg-radial from-pink-200 to-blue-50 flex items-center justify-center">
+      <img class=" z-0 w-[500px] h-[500px] object-contain fixed bottom-[-100px] left-[100px]" src="/image/doodle.png" />
         {{{ await $slots.main()}}}
     </main>
-
+    <footer class=" rounded-xl fixed bottom-[20px] right-[20px] font-montserrat text-sm font-medium z-30">
+      <h1 class=" flex items-center"><span class=" text-xl pr-1">&copy;</span>Copyright 2025 kiya</h1>
+    </footer>
   </body>
 </html>
