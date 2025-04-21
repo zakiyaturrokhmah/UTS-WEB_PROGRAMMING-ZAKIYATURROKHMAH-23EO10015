@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <title>
+      {{ title }}
+    </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+   
+  </head>
+  <body>
+   
+    <header class=" fixed max-sm:h-[50px] w-screen top-0 z-30 h-[80px] flex font-montserrat">
+      <nav class=" w-full h-full pl-[70px] pr-[70px] flex justify-between items-center">
+        <div>
+          <div class=" flex h-full items-center justify-center gap-2">
+            <i class="fa-solid fa-2xl fa-cat"></i>
+            <a href="/" class="flex-none font-semibold text-2xl text-black focus:outline-hidden focus:opacity-80"aria-label="Brand">Kiya Socmed</a>
+          </div>
+        </div>
+        <div class="">
+          <div class="flex items-center gap-5 mt-5 sm:justify-end sm:mt-0 sm:ps-5">
+            
+            @eval(await auth.check())
+  
+            @if(auth.isAuthenticated)
+  
+            <div class=" flex gap-4 items-center bg-white p-2 justify-center rounded-lg w-[150px]">
+              <i class="fa-solid fa-user"></i>
+              <a href="/{{auth.user.name}}" class=" font-medium">{{auth.user.name}}</a>
+            </div>
+  
+            <form action="/logout?_method=DELETE" method="post">
+  
+              {{ csrfField() }}
+              <div class=" flex gap-4 items-center bg-white p-2 justify-center rounded-lg w-[150px]">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <button class=" font-medium hover:text-gray-400">log out</button>
+              </div>
+  
+  
+            </form>
+  
+            @else
+            <div class=" bg-white w-[100px] h-[45px] flex items-center justify-center rounded-[20px]">
+              <a href="/login" class=" font-medium">Login</a>
+            </div>
+            <div class=" bg-white w-[100px] h-[45px] flex items-center justify-center rounded-[20px]">
+              <a href="/register" class=" font-medium">Register</a>
+            </div>
+            @end
+  
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class=" overflow-hidden h-screen relative bg-radial from-pink-200 to-blue-50 flex items-center justify-center">
+        <img class=" w-[500px] h-[500px] object-contain fixed bottom-[-100px] left-[100px]" src="/image/doodle.png"/>
+        {{{ await $slots.main()}}}
+    </main>
+
+  </body>
+</html>

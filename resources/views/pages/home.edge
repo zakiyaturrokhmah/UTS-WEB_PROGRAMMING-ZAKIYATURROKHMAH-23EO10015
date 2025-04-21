@@ -1,0 +1,34 @@
+@layout.app({ title: 'Post feed' })
+  <div class=" w-[500px] h-screen mx-auto px-6 py-10 font-montserrat">
+    @flashMessage('notification')
+      <div class="mt-2 mb-2 bg-teal-100 border border-teal-200 text-sm text-teal-800 rounded-lg p-4" role="alert">
+        {{ $message.message }}
+      </div>
+    @end
+
+    <form class="space-y-4 w-full" action="/posts" method="post">
+      {{ csrfField() }}
+
+      <div class=" w-full">
+        <textarea class="py-3 px-4 block w-full h-[150px] bg-slate-50 rounded-lg text-sm" name="content" placeholder="Apa yang anda pikirkan?"></textarea>
+
+        @inputError('content')
+        <div class=" p-2 bg-slate-50/35 rounded-xl mt-2 flex items-center">
+          <p class="text-xs text-red-600">{{ $messages }}</p>
+        </div>
+        @end
+      </div>
+
+      <button
+        class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-pink-400 text-white hover:bg-pink-400 disabled:opacity-50 disabled:pointer-events-none">
+        Post
+      </button>
+    </form>
+
+    <div class="mt-10 space-y-5 w-full h-[400px] overflow-auto">
+      @each(post in posts)
+        @include('pages/partials/post')
+      @end
+    </div>
+  </div>
+@end
